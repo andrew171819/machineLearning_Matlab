@@ -47,8 +47,8 @@ for layer = 1: numel(net.layers)
 		     ./ (net.layers{1, layer}.momentum{3} .^ 0.5 + opts.parameters.eps) .* mom_factor2 ^0.5 ./ mom_factor ...
 		     - opts.parameters.weightDecay * net.layers{1, layer}.weights{1};
 
-		     net.layers{1, layer}.momentum{2} = opts.parameters.mom.*net.layers{1, layer}.momentum{2} + (1 - opts.parameters.mom).*res(layer).dzdb;
-		     net.layers{1, layer}.momentum{4} = opts.parameters.mom.*net.layers{1, layer}.momentum{4} + (1 - opts.parameters.mom).*res(layer).dzdb .^ 2;
+		     net.layers{1, layer}.momentum{2} = opts.parameters.mom .* net.layers{1, layer}.momentum{2} + (1 - opts.parameters.mom) .* res(layer).dzdb;
+		     net.layers{1, layer}.momentum{4} = opts.parameters.mom .* net.layers{1, layer}.momentum{4} + (1 - opts.parameters.mom) .* res(layer).dzdb .^ 2;
 		     net.layers{1, layer}.weights{2} = net.layers{1, layer}.weights{2} - opts.parameters.lr * net.layers{1, layer}.momentum{2} ...
 		     ./ (net.layers{1, layer}.momentum{4} .^0.5 + opts.parameters.eps) .* mom_factor2 ^0.5 ./ mom_factor;
 	     end
