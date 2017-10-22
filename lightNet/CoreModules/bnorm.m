@@ -40,7 +40,7 @@ if ~isfield(opts.parameters, 'simple_bn')
 end
 mom_factor = 1 - opts.parameters.mom_bn .^ (net.iterations_bn + 1);
 
-if(length(size(x)) > 2)
+if (length(size(x)) > 2)
 	batch_dim = 4; 
 else
 	batch_dim = 2;
