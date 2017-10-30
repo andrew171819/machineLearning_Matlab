@@ -23,8 +23,8 @@
 % Main_CNN_ImageNet_minimal();
 % cd ..
 
-% clear all;
-% cd('./CNN');
-% disp('Testing training a new convolutional neural network.')
-% Main_CIFAR_CNN_slow_SGD();
-% cd ..
+clear all;
+cd('./CNN');
+disp('Testing training a new convolutional neural network.')
+Main_CIFAR_CNN_slow_SGD();
+cd ..
