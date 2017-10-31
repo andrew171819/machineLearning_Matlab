@@ -15,13 +15,13 @@
 % cd('./RNN');
 % disp('Testing training an LSTM.')
 % Main_Char_RNN();
-% cd ..
+% cd ..r
 
-% clear all;
-% cd('./CNN');
-% disp('Testing using a pretrained ImageNet convolutional neural network model.')
-% Main_CNN_ImageNet_minimal();
-% cd ..
+clear all;
+cd('./CNN');
+disp('Testing using a pretrained ImageNet convolutional neural network model.')
+Main_CNN_ImageNet_minimal();
+cd ..
 
 clear all;
 cd('./CNN');

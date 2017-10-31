@@ -1,4 +1,4 @@
-function [ opts ] = PrepareData_CIFAR_CNN( opts )
+function [opts] = PrepareData_CIFAR_CNN(opts)
 
 imdb=getCifarImdb(opts);
 
