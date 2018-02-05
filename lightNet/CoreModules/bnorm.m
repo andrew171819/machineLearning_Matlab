@@ -89,5 +89,4 @@ else
 	y = bsxfun(@times, dzdy, net.layers{1, layer_idx}.weights{1});
 	y = bsxfun(@rdivide, y, (net.layers{1, layer_idx}.weights{4} ./ mom_factor+opts.parameters.eps_bn) .^ (0.5));
 end
-
 end

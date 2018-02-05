@@ -7,7 +7,7 @@ scale = cast(1 / (1 - opts.rate), 'like', x) ;
 backMode = 1;
 if isempty(mask)
 	backMode = 0;
-	if isa(x,'gpuArray')
+	if isa(x, 'gpuArray')
 		mask = scale * (gpuArray.rand(size(x), classUnderlying(x)) >= opts.rate);
 	else
 		mask = scale * (rand(size(x), 'like', x) >= opts.rate);

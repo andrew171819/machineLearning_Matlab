@@ -11,7 +11,7 @@ if isempty(dzdy)
 		if numel(bias) == numel(y)
 			y = y + bias; %much faster
 	else
-		y = bsxfun(@plus, y, bias);
+        y = bsxfun(@plus, y, bias);
 	end
 end
 

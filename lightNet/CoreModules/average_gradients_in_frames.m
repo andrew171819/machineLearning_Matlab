@@ -19,5 +19,4 @@ for layer = 1: length(Frames{1})
 		Accum_Grad(layer).dzdb = Accum_Grad(layer).dzdb ./ n_frames;
 	end        
 end
-
 end

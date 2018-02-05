@@ -122,9 +122,7 @@ else
 
     %next line is a dirty circular shift, according to matlab fft implementation.
     y = circshift(y, [(k1-1), (k2-1)]); 
-
     if (~isempty(pad))
 	    y = y(1 + pad(1):1 + pad(1) + original_size_r - 1, 1 + pad(3):1 + pad(3) + original_size_c - 1, :, :);
     end
-
 end

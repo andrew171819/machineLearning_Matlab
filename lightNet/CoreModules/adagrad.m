@@ -1,8 +1,8 @@
-function [net, res, opts = adagrad(net, res, opts)
+function [net, res, opts] = adagrad(net, res, opts)
     % NET_APPLY_GRAD_SGD Summary of this function goes here
     
     if ~isfield(opts.parameters, 'weightDecay')
-    opts.parameters.weightDecay = 1e-4;
+        opts.parameters.weightDecay = 1e-4;
     end
     
     if ~isfield(opts.results, 'lrs')
