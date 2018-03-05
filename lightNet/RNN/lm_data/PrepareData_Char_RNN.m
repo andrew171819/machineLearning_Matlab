@@ -1,6 +1,6 @@
 function [ opts ] = PrepareData_Char_RNN( opts )
 
-max_char=67;
+max_char = 67;
 
 x = textread('train_x.txt');
 x(:,end)=[];
