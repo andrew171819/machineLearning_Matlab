@@ -1,14 +1,14 @@
 function [net, res, opts] = lstm_ff(net, opts)
-n_frames=opts.parameters.n_frames;
-n_cell_nodes=opts.parameters.n_cell_nodes;
-n_hidden_nodes=opts.parameters.n_hidden_nodes;
-batch_size=opts.parameters.batch_size;
+n_frames = opts.parameters.n_frames;
+n_cell_nodes = opts.parameters.n_cell_nodes;
+n_hidden_nodes = opts.parameters.n_hidden_nodes;
+batch_size = opts.parameters.batch_size;
 
 if opts.use_gpu
-    opts.input_data=gpuArray(single(opts.input_data));
-    if isfield(opts,'input_labels')
-        opts.input_labels=gpuArray(single(opts.input_labels));
-        opts.err=zeros(2,n_frames,'like',opts.input_data);
+    opts.input_data = gpuArray(single(opts.input_data));
+    if isfield(opts, 'input_labels')
+        opts.input_labels = gpuArray(single(opts.input_labels));
+        opts.err = zeros(2,n_frames,'like',opts.input_data);
         
     end
     if isfield(opts,'input_predicts')
