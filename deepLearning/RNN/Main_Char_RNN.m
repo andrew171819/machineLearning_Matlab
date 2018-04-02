@@ -1,22 +1,14 @@
 clear all;
-
-%%%%%%%%%%%%%This example will need to be reorganized
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%provide parameters and inputs below
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% provide parameters and inputs below
 
 addpath('../')
-
 addpath(genpath('../CoreModules'));
-
 addpath('./lm_data');
 
-n_epoch=20;%20 %%training epochs
+n_epoch=20;
 dataset_name='char'; % dataset name
 network_name='lstm';%'gru';'rnn','lstm'
-use_gpu=0; %%use gpu or not 
+use_gpu=0; %%use gpu or not
 opts.use_cudnn=0;
 
 PrepareDataFunc=@PrepareData_Char_RNN; %%function handler to prepare your data
@@ -24,7 +16,7 @@ PrepareDataFunc=@PrepareData_Char_RNN; %%function handler to prepare your data
 if strcmp(network_name,'lstm')
     NetInit=@net_init_char_lstm;%_bn  %% function to initialize the network
 end
-   
+
 if strcmp(network_name,'gru')
     NetInit=@net_init_char_gru;  %% function to initialize the network
 end
@@ -86,7 +78,7 @@ opts.parameters.selective_sgd=use_selective_sgd;
 opts.n_epoch=n_epoch; %training epochs
 opts.dataset_name=dataset_name; %dataset name
 opts.network_name=network_name; %network name
-opts.use_gpu=use_gpu; %use gpu or not 
+opts.use_gpu=use_gpu; %use gpu or not
 
 opts.results=[];
 opts.results.TrainEpochError=[];
@@ -107,7 +99,7 @@ net=NetInit(opts);
 
 opts=generate_output_filename(opts);
 
-if(opts.use_gpu)       
+if(opts.use_gpu)
     for i=1:length(net)
         net{i}=SwitchProcessor(net{i},'gpu');
     end
@@ -143,7 +135,7 @@ end
 for ep=start_ep:opts.n_epoch
     
     
-    [net,opts]=train_rnn(net,opts);  
+    [net,opts]=train_rnn(net,opts);
     [opts]=test_rnn(net,opts);
     opts.parameters.current_ep=opts.parameters.current_ep+1;
     disp(['Epoch ',num2str(ep),' testing error: ',num2str(opts.results.TestEpochError(end)), ' testing loss: ',num2str(opts.results.TestEpochLoss(end))])
@@ -155,9 +147,9 @@ for ep=start_ep:opts.n_epoch
         drawnow;
     end
     %}
-    parameters=opts.parameters;    
+    parameters=opts.parameters;
     results=opts.results;
-    save([fullfile(opts.output_dir2,[opts.output_name2,num2str(ep),'.mat'])],'net','parameters','results');     
+    save([fullfile(opts.output_dir2,[opts.output_name2,num2str(ep),'.mat'])],'net','parameters','results');
 end
 
 copyfile(fullfile(opts.output_dir2,[opts.output_name2,num2str(ep),'.mat']),fullfile(opts.output_dir,opts.output_name));
