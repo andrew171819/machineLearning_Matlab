@@ -1,18 +1,18 @@
 function Main_CNN_ImageNet_minimal()
-% minimalistic demonstration of how to run an ImageNet cnn model
+% how to run an imageNet cnn model
 
 % setup toolbox
 addpath(genpath('../CoreModules'))
-% download a pre-trained CNN from the web
+% download a pre-trained cnn from the web
 if ~exist('imagenet-vgg-f.mat', 'file')
-    fprintf('Downloading a model ... this may take a while\n');
+    fprintf('downloading a model\n');
     urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', 'imagenet-vgg-f.mat');
 end
 net = load('imagenet-vgg-f.mat');
 
 % obtain and preprocess an image
-im = imread('test_im.JPG');
-im_ = single(im); % note, 255 range
+im = imread('test.jpg');
+im_ = single(im); % 255 range
 im_ = imresize(im_, net.meta.normalization.imageSize(1: 2));
 im_ = bsxfun(@minus, im_, net.meta.normalization.averageImage);
 
