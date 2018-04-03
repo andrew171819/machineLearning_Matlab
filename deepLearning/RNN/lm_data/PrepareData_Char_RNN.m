@@ -4,7 +4,7 @@ max_char = 67;
 x = textread('train_x.txt');
 x(:, end) = [];
 opts.train = zeros(max_char, size(x,1),size(x, 2));
-Index=x(:)' + 1 + max_char*[(0:numel(x) - 1)];
+Index=x(:)' + 1 + max_char * [(0:numel(x) - 1)];
 opts.train(Index) = 1;
 
 x = textread('train_y.txt');
