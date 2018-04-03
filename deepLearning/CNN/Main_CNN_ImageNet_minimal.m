@@ -1,5 +1,5 @@
-%function Main_CNN_ImageNet_minimal()
-% Minimalistic demonstration of how to run an ImageNet CNN model
+function Main_CNN_ImageNet_minimal()
+% minimalistic demonstration of how to run an ImageNet cnn model
 
 % setup toolbox
 addpath(genpath('../CoreModules'))
@@ -16,10 +16,10 @@ im_ = single(im); % note, 255 range
 im_ = imresize(im_, net.meta.normalization.imageSize(1: 2));
 im_ = bsxfun(@minus, im_, net.meta.normalization.averageImage);
 
-% run the CNN
+% run cnn
 opts = [];
-opts.use_gpu = 0; % unless you have a good gpu
-opts.use_cudnn = 0; % Requires to compile MatConvNet to use it.
+opts.use_gpu = 0;
+opts.use_cudnn = 0; % requires to compile matConvNet
 
 opts.training = 0;
 opts.use_corr = 1;
@@ -29,8 +29,9 @@ if opts.use_gpu
     net = SwitchProcessor(net, 'gpu');
 end
 tic;
-[net,res,opts] = net_ff(net,res,opts);
+[net, res, opts] = net_ff(net, res, opts);
 toc;
+
 % show the classification result
 scores = squeeze(gather(res(end).x));
 [bestScore, best] = max(scores);

@@ -1,5 +1,5 @@
 function imdb = getCifarImdb(opts)
-% Preapre the imdb structure, returns image data with mean image subtracted
+% preapre the imdb structure, returns image data with mean image subtracted
 unpackPath = fullfile(opts.dataDir, 'cifar-10-batches-mat');
 files = [arrayfun(@(n) sprintf('data_batch_%d.mat', n), 1: 5, 'UniformOutput', false), {'test_batch.mat'}];
 files = cellfun(@(fn) fullfile(unpackPath, fn), files, 'UniformOutput', false);
@@ -17,7 +17,7 @@ sets = cell(1, numel(files));
 for fi = 1: numel(files)
     fd = load(files{fi});
     data{fi} = permute(reshape(fd.data', 32, 32, 3, []), [2 1 3 4]);
-    labels{fi} = fd.labels' + 1; % Index from 1
+    labels{fi} = fd.labels' + 1;
     sets{fi} = repmat(file_set(fi), size(labels{fi}));
 end
 
@@ -28,11 +28,8 @@ data = single(cat(4, data{:}));
 dataMean = mean(data(:, :, :, set == 1), 4);
 data = bsxfun(@minus, data, dataMean);
 
-% normalize by image mean and std as suggested in `An Analysis of
-% Single-Layer Networks in Unsupervised Feature Learning` Adam
-% Coates, Honglak Lee, Andrew Y. Ng
-
-if isfield(opts,'contrastNormalization')&&opts.contrastNormalization
+% normalize by image mean and std
+if isfield(opts,'contrastNormalization') && opts.contrastNormalization
     z = reshape(data, [], 60000);
     z = bsxfun(@minus, z, mean(z, 1));
     n = std(z, 0, 1);
@@ -43,8 +40,7 @@ end
 if isfield(opts, 'whitenData') &&opts.whitenData
     z = reshape(data, [], 60000);
     W = z(:, set == 1) * z(:, set == 1)' / 60000;
-    [V,D] = eig(W);
-    % the scale is selected to approximately preserve the norm of W
+    [V, D] = eig(W);
     d2 = diag(D);
     en = sqrt(mean(d2));
     z = V * diag(en ./ max(sqrt(d2), 10)) * V' * z;
