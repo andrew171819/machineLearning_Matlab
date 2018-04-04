@@ -1,5 +1,5 @@
 function [y, from] = maxpool(I, K, S, pad, dzdy, from, opts)
-if exist('opts','var')
+if exist('opts', 'var')
     if ~isfield(opts, 'parameters') || ~isfield(opts.parameters, 'eps_pool')
         opts.parameters.eps_pool = 0.0;
     end
@@ -9,7 +9,7 @@ else
 end
 
 if isempty(dzdy)
-    %forward
+    % forward
     if(~isempty(pad))
         I = pad_data(I, pad, []);
     end
@@ -34,8 +34,8 @@ if isempty(dzdy)
     from = reshape(from, Hout, Wout, N, B);
     
     if opts.training == 1 && opts.parameters.eps_pool > 0.0
-        p = randperm(numel(from), ceil(numel(from) * opts.parameters.eps_pool)); %idx
-        from(p) = randi(K * K,[length(p), 1]); %random sampled
+        p = randperm(numel(from), ceil(numel(from) * opts.parameters.eps_pool)); % idx
+        from(p) = randi(K * K,[length(p), 1]); % random sampled
     end
     
     idx0 = reshape(idx0(1, :, :, :) - 1, size(from));
@@ -44,7 +44,7 @@ if isempty(dzdy)
     from = from + idx0;
     
 else
-    %backward
+    % backward
     input_size = size(I);
     original_size_r = input_size(1);
     original_size_c = input_size(2);

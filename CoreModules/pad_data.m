@@ -4,15 +4,15 @@ if (length(P) == 1)
 end
 
 if isempty(dzdy)
-    %forward
-    original_size=size(I);
+    % forward
+    original_size = size(I);
     new_size = original_size;
     new_size(1) = new_size(1) + P(1) + P(2);
-    new_size(2) = new_size(2)+P(3)+P(4);
+    new_size(2) = new_size(2) + P(3) + P(4);
     y = zeros(new_size, 'like', I);
     y(1 + P(1): 1 + P(1) + original_size(1) - 1, 1 + P(3): 1 + P(3) + original_size(2) - 1, :, :) = I;
 else
-    %backward
+    % backward
     new_size = size(dzdy);
     original_size = new_size;
     original_size(1) = original_size(1) - P(1) - P(2);

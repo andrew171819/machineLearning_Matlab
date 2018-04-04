@@ -24,7 +24,7 @@ for layer = numel(net.layers): -1: 1
                 net.layers{1, layer}.pad = [];
             end
             
-            [res(layer).dzdx, res(layer).dzdw, res(layer).dzdb, opts] = fast_conv_layer(res(layer).x, net.layers{1, layer}.weights{1}, net.layers{1, layer}.weights{2}, net.layers{1,layer}.stride, net.layers{1,layer}.pad, res(layer + 1).dzdx, opts);
+            [res(layer).dzdx, res(layer).dzdw, res(layer).dzdb, opts] = fast_conv_layer(res(layer).x, net.layers{1, layer}.weights{1}, net.layers{1, layer}.weights{2}, net.layers{1, layer}.stride, net.layers{1, layer}.pad, res(layer + 1).dzdx, opts);
             
         case 'mlp'
             [res(layer).dzdx, res(layer).dzdw, res(layer).dzdb] = fast_mlp_layer(res(layer).x, net.layers{1, layer}.weights{1}, net.layers{1, layer}.weights{2}, res(layer + 1).dzdx);
