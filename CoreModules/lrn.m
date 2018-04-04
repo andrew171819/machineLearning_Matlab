@@ -2,7 +2,7 @@ function [y] = lrn(x, N, kappa, alpha, beta, dzdy)
 sz = size(x);
 if (length(sz) > 2)
     channel_dim = 3;
-    Index={':',':'}; %cnn
+    Index={':', ':'}; %cnn
 else
     channel_dim = 1;
     Index = {}; %mlp
@@ -12,7 +12,7 @@ y=zeros(size(x), 'like', x);
 L = y;
 x2_cumu = cumsum(x .^ 2, channel_dim);
 
-n_channels = size(x,channel_dim);
+n_channels = size(x, channel_dim);
 for n = 1: n_channels
     nStart = max(n - floor((N - 1) / 2), 1) - 1;
     nEnd = min(n + ceil((N - 1) / 2), n_channels);
