@@ -37,7 +37,7 @@ for ep = start_ep:opts.n_epoch
     [net, opts] = train_net(net, opts);
     [opts] = test_net(net,opts);
     opts.parameters.current_ep = opts.parameters.current_ep + 1;
-    disp(['Epoch ', num2str(ep), ' testing error rate: ', num2str(opts.results.TestEpochError(end))])
+    disp(['epoch ', num2str(ep), ' testing error rate, ', num2str(opts.results.TestEpochError(end))])
     
     if opts.plot
         subplot(1,2,1);
@@ -51,7 +51,7 @@ for ep = start_ep:opts.n_epoch
         hold on;
         plot(opts.results.TestEpochLoss);
         hold off;
-        title('Loss per Epoch')
+        title('loss per epoch')
         drawnow;
     end
     

@@ -1,5 +1,4 @@
 function net = net_init(opts)
-% CNN_MNIST_LENET Initialize a CNN similar for MNIST
 
 rng('default');
 rng(0) ;

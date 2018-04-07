@@ -1,8 +1,8 @@
 % takes an action (0 or 1) and the current values of the four state variables and updates their values by estimating the state TAU seconds later
 function [x, x_dot, theta, theta_dot] = Cart_Pole(action, x, x_dot, theta, theta_dot)
 g = 9.8;
-Mass_Cart = 1.0; % mass of the cart is assumed to be 1Kg
-Mass_Pole = 0.1; % mass of the pole is assumed to be 0.1Kg
+Mass_Cart = 1.0; % mass of the cart is assumed to be 1 kg
+Mass_Pole = 0.1; % mass of the pole is assumed to be 0.1 kg
 Total_Mass = Mass_Cart + Mass_Pole;
 Length = 0.5; % half of the length of the pole
 PoleMass_Length = Mass_Pole * Length;

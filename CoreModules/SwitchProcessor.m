@@ -2,11 +2,11 @@ function net = SwitchProcessor(net, hardware)
 switch hardware
     case 'gpu', moveop = @(x) gpuArray(x) ;
     case 'cpu', moveop = @(x) gather(x) ;
-    otherwise, error('Unknown destination ''%s''.', destination) ;
+    otherwise, error('unknown destination ''%s''.', destination) ;
 end
-for l = 1:numel(net.layers)
+for l = 1: numel(net.layers)
     switch net.layers{l}.type
-        case {'conv','mlp'}
+        case {'conv', 'mlp'}
             for f = {'weights', 'momentum','lr'}
                 f = char(f) ;
                 if isfield(net.layers{l}, f)

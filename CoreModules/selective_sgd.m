@@ -11,9 +11,9 @@ if (mod(opts.parameters.current_ep, opts.parameters.ssgd_search_freq) == 1 || op
     opts.parameters.lr = lr_best;
     
     if (opts.parameters.init_train && opts.parameters.selection_count == 0)
-        disp(['Initial training.']);
+        disp(['initial training']);
         opts.parameters.initial_lr = lr_best * 0.1;
-        opts.parameters.lr=opts.parameters.initial_lr;
+        opts.parameters.lr = opts.parameters.initial_lr;
         opts.parameters.current_ep = 0;
     else
         if ~isfield(opts.parameters, 'selected_lr')
