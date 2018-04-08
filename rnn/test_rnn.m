@@ -11,18 +11,18 @@ for mini_b = 1: opts.n_test_batch
     
     % forward
     if strcmp(opts.network_name, 'lstm')
-        [net, res, opts] = lstm_ff( net, opts );
+        [net, res, opts] = lstm_ff(net, opts);
     end
     if strcmp(opts.network_name, 'gru')
-        [net, res, opts] = gru_ff( net, opts );
+        [net, res, opts] = gru_ff(net, opts);
     end
     if strcmp(opts.network_name, 'rnn')
-        [net, res, opts] = rnn_ff( net, opts );
+        [net, res, opts] = rnn_ff(net, opts);
     end
     
-    if isfield(opts, 'err') opts.MiniBatchError = [opts.MiniBatchError;gather( opts.err(1))];
+    if isfield(opts, 'err') opts.MiniBatchError = [opts.MiniBatchError; gather(opts.err(1))];
     end
-    opts.MiniBatchLoss = [opts.MiniBatchLoss;gather( opts.loss)];
+    opts.MiniBatchLoss = [opts.MiniBatchLoss; gather(opts.loss)];
 end
 
 opts.results.TestEpochError = [opts.results.TestEpochError; mean(opts.MiniBatchError(:))];

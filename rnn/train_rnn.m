@@ -16,7 +16,7 @@ tic
 
 opts.order = randperm(opts.n_train);
 for mini_b = 1: opts.n_batch
-    idx = opts.order(1+(mini_b-1)*opts.parameters.batch_size:mini_b*opts.parameters.batch_size);
+    idx = opts.order(1 + (mini_b - 1) * opts.parameters.batch_size: mini_b * opts.parameters.batch_size);
     
     opts.input_data = opts.train(:, idx, :);
     opts.input_labels = opts.train_labels(idx, :);
@@ -66,7 +66,7 @@ for mini_b = 1: opts.n_batch
     if (~isfield(opts.parameters, 'iterations'))
         opts.parameters.iterations = 0;
     end
-    opts.parameters.iterations = opts.parameters.iterations+1;
+    opts.parameters.iterations = opts.parameters.iterations + 1;
     
     % apply gradients
     for i = 1: length(net)
@@ -76,21 +76,21 @@ for mini_b = 1: opts.n_batch
     end
     
     if strcmp(opts.network_name, 'lstm')
-        [net{1}, res.Gates, opts]  = feval( opts.parameters.learning_method, net{1}, res.Gates, opts);
+        [net{1}, res.Gates, opts] = feval( opts.parameters.learning_method, net{1}, res.Gates, opts);
         [net{2}, res.Input, opts] = feval( opts.parameters.learning_method, net{2}, res.Input, opts);
         [net{3}, res.Cell, opts] = feval( opts.parameters.learning_method, net{3}, res.Cell, opts);
         [net{4}, res.Fit, opts] = feval( opts.parameters.learning_method, net{4}, res.Fit, opts);
     end
     
     if strcmp(opts.network_name, 'gru')
-        [net{1}, res.Gates, opts] = feval( opts.parameters.learning_method, net{1}, res.Gates, opts);
-        [net{2}, res.Input, opts] = feval( opts.parameters.learning_method, net{2}, res.Input, opts);
-        [net{3}, res.Fit, opts] = feval( opts.parameters.learning_method, net{3}, res.Fit, opts);
+        [net{1}, res.Gates, opts] = feval(opts.parameters.learning_method, net{1}, res.Gates, opts);
+        [net{2}, res.Input, opts] = feval(opts.parameters.learning_method, net{2}, res.Input, opts);
+        [net{3}, res.Fit, opts] = feval(opts.parameters.learning_method, net{3}, res.Fit, opts);
     end
     
     if strcmp(opts.network_name, 'rnn')
-        [net{1}, res.Input, opts] = feval( opts.parameters.learning_method, net{1}, res.Input, opts);
-        [net{2}, res.Fit, opts] = feval( opts.parameters.learning_method, net{2}, res.Fit, opts);
+        [net{1}, res.Input, opts] = feval(opts.parameters.learning_method, net{1}, res.Input, opts);
+        [net{2}, res.Fit, opts] = feval(opts.parameters.learning_method, net{2}, res.Fit, opts);
     end
 end
 
