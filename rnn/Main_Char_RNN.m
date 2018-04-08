@@ -42,8 +42,8 @@ if strcmp(network_name, 'gru')
 end
 
 opts.parameters.n_frames = 64; % max sentence length
-opts.parameters.lr  = sgd_lr;
-opts.parameters.mom  = 0.9;
+opts.parameters.lr = sgd_lr;
+opts.parameters.mom = 0.9;
 opts.parameters.learning_method = learning_method;
 opts.parameters.selective_sgd = use_selective_sgd;
 
@@ -108,7 +108,7 @@ for ep = start_ep:opts.n_epoch
         hold on;
         plot(opts.results.TestEpochLoss);
         hold off;
-        title('Loss per Epoch')
+        title('loss per Epoch')
         drawnow;
     end
     
