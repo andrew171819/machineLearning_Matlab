@@ -1,4 +1,4 @@
-% takes an action (0 or 1) and the current values of the four state variables and updates their values by estimating the state TAU seconds later
+% takes an action (0 or 1) and the current values of the four state variables and updates their values by estimating the state tau seconds later
 function [x, x_dot, theta, theta_dot] = Cart_Pole(action, x, x_dot, theta, theta_dot)
 g = 9.8;
 Mass_Cart = 1.0; % mass of the cart is assumed to be 1 kg

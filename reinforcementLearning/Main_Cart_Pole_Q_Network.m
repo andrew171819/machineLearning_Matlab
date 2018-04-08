@@ -1,7 +1,7 @@
-% this file contains a simulation of the cart and pole dynamic system and a procedure for learning to balance the pole
+% simulation of the cart and pole dynamic system and a procedure for learning to balance the pole
 clear all;
 
-SHOW_ANIMATION = 0; % if you want to visualize, set this to 1
+SHOW_ANIMATION = 0;
 
 % initialize the network
 net = net_init_pole();
@@ -25,13 +25,13 @@ steps = 0;
 failures = 0;
 success = 0;
 
-opts.use_gpu = 0; % don't use gpu for this application, since it will be slow
+opts.use_gpu = 0;
 opts.parameters.mom = 0.9;
 opts.parameters.lr =1e1;
 opts.parameters.weightDecay = 1e-6;
 opts.parameters.clip = 5e-3;
 
-% turning on the double buffering to plot the cart and pole
+% turn on the double buffering to plot the cart and pole
 if SHOW_ANIMATION
     h = figure(1);
     set(h, 'doublebuffer', 'on')
@@ -40,7 +40,7 @@ end
 % iterate through the action-learn loop
 while (failures < MAX_FAILURES)
     % reset starts
-    % Starting state is (0 0 0 0)
+    % starting state is (0 0 0 0)
     x = 0; % cart position, meters
     x_dot = 0; % cart velocity
     theta = 0; % pole angle, radians
@@ -60,16 +60,16 @@ while (failures < MAX_FAILURES)
     Q_new = res(end).x;
     [V_new,a_new] = max(Q_new);
     
-    % RESET  ENDS
+    % reset ends
     failed = 0;
     
     while steps < MAX_STEPS && failed == 0
         if SHOW_ANIMATION && (mod(failures, SHOW_ANIMATION_Every_N) == 0 || success)
-            plot_Cart_Pole(x,theta)
+            plot_Cart_Pole(x, theta)
         end
         % choose action randomly, biased by current weight.
         r = rand(1);
-        % make a selection and report the score Q(s,a)
+        % make a selection and report the score q(s,a)
         
         Q_old = Q_new;
         
@@ -96,7 +96,7 @@ while (failures < MAX_FAILURES)
             failures=failures+1;
             MaxSteps = [MaxSteps;steps];
             
-            disp(['Trial was ' int2str(failures) ' steps ' num2str(steps)]);
+            disp(['trial was ' int2str(failures) ' steps ' num2str(steps)]);
             
             % reinforcement upon failure is -1, prediction of failure is 0
             r = -1.0;
@@ -105,10 +105,10 @@ while (failures < MAX_FAILURES)
             steps = 0;
             
         else
-            % not a failure.
+            % not a failure
             failed = 0;
             
-            % reinforcement is 0. Prediction of failure given by v weight
+            % reinforcement is 0, prediction of failure given by v weight
             r = 0;
             
             % value of the new state:
@@ -136,7 +136,7 @@ while (failures < MAX_FAILURES)
             [net, res, opts] = sgd(net, res, opts);
             
             TrainErr = [TrainErr; mean(BatchErr(1: opts.samples - 1))];
-         
+            
             opts.samples = 0;
         end
     end
@@ -160,6 +160,6 @@ close all;
 figure;
 subplot(1,2,1);
 plot(TrainErr);
-title('training Errors');
+title('training errors');
 subplot(1,2,2);
 plot(MaxSteps);title('steps');

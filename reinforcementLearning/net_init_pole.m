@@ -1,5 +1,4 @@
 function net = net_init()
-% cnn_mnist_lenet initializes a cnn similar for mnist
 
 rng('default');
 rng(0) ;
