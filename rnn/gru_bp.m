@@ -9,7 +9,7 @@ for f = 1: n_frames
 end
 
 % bptt, calculate the gradient wrt the hidden nodes
-dzdh = 0; %accumulated gradient in later time frames
+dzdh = 0; % accumulated gradient in later time frames
 for f = n_frames: -1: 1
     dzdh = dzdh + res.Fit{f}(1).dzdx;
     ResetGate = res.Gates{f}(end).x(1: n_hidden_nodes, :);

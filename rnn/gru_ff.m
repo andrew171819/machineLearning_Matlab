@@ -13,7 +13,7 @@ if opts.use_gpu
         opts.input_predicts = gpuArray(single(opts.input_predicts));
     end
 end
-opts.loss=zeros(1, n_frames, 'like', opts.input_data);
+opts.loss = zeros(1, n_frames, 'like', opts.input_data);
 
 for f = 1: n_frames
     if isfield(opts, 'input_predicts')
@@ -26,7 +26,7 @@ res.Hidden{1}(1).x = zeros(n_hidden_nodes, batch_size, 'like', opts.input_data);
 
 for f = 1: n_frames
     % process inputs
-    res.Gates{f}(1).x = [res.Hidden{f}(1).x; opts.input_data(:, :, f)]; %inputs
+    res.Gates{f}(1).x = [res.Hidden{f}(1).x; opts.input_data(:, :, f)];
     
     % gates
     [net{1}, res.Gates{f}, opts] = net_ff(net{1}, res.Gates{f}, opts);
