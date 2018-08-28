@@ -1,1 +1,1 @@
-Here are implementations (in Matlab) of some basic machine learning algorithms
+Implementations (in Matlab) of some machine learning algorithms
