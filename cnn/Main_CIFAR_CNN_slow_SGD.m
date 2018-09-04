@@ -1,10 +1,10 @@
 clear all;
-addpath(genpath('../CoreModules'));
+addpath(genpath('../subprograms'));
 n_epoch = 50;
 dataset_name = 'cifar';
 network_name = 'slow-cnn';
-use_gpu = 1;
-opts.use_cudnn = 0; % requires to compile matConvNet
+use_gpu = 0;
+opts.use_cudnn = 0;
 PrepareDataFunc = @PrepareData_CIFAR_CNN;
 NetInit = @net_init_cifar_slow;
 

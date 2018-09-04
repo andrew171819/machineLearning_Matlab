@@ -6,6 +6,7 @@ rng(0);
 
 f = 1 / 100;
 net.layers = {};
+
 % block 1
 net.layers{end + 1} = struct('type', 'conv', 'weights', {{f  *  randn(5, 5, 3, 32, 'single'), zeros(1, 32, 'single') }}, 'stride', 1, 'pad', 2);
 net.layers{end + 1} = struct('type', 'relu');

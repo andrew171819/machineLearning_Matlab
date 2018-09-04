@@ -1,6 +1,6 @@
 function [opts] = PrepareData_CIFAR_CNN(opts)
 
-imdb=getCifarImdb(opts);
+imdb = getCifarImdb(opts);
 
 opts.train = imdb.images.data(:, :, :, imdb.images.set == 1);
 opts.train_labels = imdb.images.labels(imdb.images.set == 1);
