@@ -1,5 +1,5 @@
 clear all;
 cd('./mlp');
-disp('testing training a multilayer perceptron')
-Main_MNIST_MLP_RMSPROP();
+disp('train a multilayer perceptron')
+mnist_mlp_rmsprop();
 cd ..

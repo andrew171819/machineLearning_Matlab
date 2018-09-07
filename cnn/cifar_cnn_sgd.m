@@ -5,8 +5,9 @@ dataset_name = 'cifar';
 network_name = 'cnn';
 use_gpu = 0;
 opts.use_cudnn = 0;
-data = @prepareData_cifar_cnn;
-netInit = @net_init_cifar;
+
+PrepareDataFunc = @prepareData_cifar_cnn;
+NetInit = @net_init_cifar;
 
 use_selective_sgd = 1;
 ssgd_search_freq = 20;

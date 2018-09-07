@@ -1,4 +1,4 @@
-function [opts] = PrepareData_MNIST_MLP(opts)
+function [opts] = prepareData_mnist_mlp(opts)
 
 imdb = get_mnist(opts);
 

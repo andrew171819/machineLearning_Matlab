@@ -1,6 +1,5 @@
 function [imdb] = get_mnist(opts)
 
-% preapre the imdb structure, returns image data with mean image subtracted
 files = {'train-images-idx3-ubyte', 'train-labels-idx1-ubyte', 't10k-images-idx3-ubyte', 't10k-labels-idx1-ubyte'};
 
 if ~exist(opts.dataDir, 'dir')

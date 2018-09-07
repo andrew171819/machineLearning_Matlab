@@ -1,5 +1,5 @@
 if opts.LoadNet ~= 1
-    net = NetInit(opts);
+    net = netInit(opts);
 else
     load([fullfile(opts.output_dir, opts.output_name)]);
     opts.parameters = parameters;
