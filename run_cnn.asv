@@ -1,0 +1,11 @@
+clear all;
+cd('./cnn');
+disp('testing using a pretrained imageNet cnn model')
+cnn_imageNet();
+cd ..
+
+clear all;
+cd('./cnn');
+disp('testing training a new cnn model')
+cifar_CNN_sgd();
+cd ..

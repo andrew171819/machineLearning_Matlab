@@ -8,7 +8,7 @@ end
 opts.LoadNet = 0;
 
 opts.dataDir =  ['./', opts.dataset_name, '/'];
-opts = PrepareDataFunc(opts);
+opts = data(opts);
 opts.parameters.current_ep = 1;
 
 opts.parameters.learning_method = learning_method;

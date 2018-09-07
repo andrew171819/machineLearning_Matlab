@@ -1,21 +1,21 @@
-function Main_CNN_ImageNet_minimal()
+function cnn_imageNet()
 addpath(genpath('../subprograms'))
+if ~exist('imagenet-vgg.mat', 'file')
+    fprintf('downloading a model\n');
+    urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', 'imagenet-vgg.mat');
+end
+net = load('imagenet-vgg.mat');
 
-% download a pre-trained cnn from the web
-% if ~exist('imagenet-vgg-f.mat', 'file')
-%     fprintf('downloading a model\n');
-%     urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', 'imagenet-vgg-f.mat');
-% end
-net = load('imagenet-vgg-f.mat');
-
+% obtain and preprocess an image
 im = imread('test.jpg');
 im_ = single(im); % 255 range
 im_ = imresize(im_, net.meta.normalization.imageSize(1: 2));
 im_ = bsxfun(@minus, im_, net.meta.normalization.averageImage);
 
+% run cnn
 opts = [];
 opts.use_gpu = 0;
-opts.use_cudnn = 0; % requires to compile matConvNet
+opts.use_cudnn = 0;
 
 opts.training = 0;
 opts.use_corr = 1;

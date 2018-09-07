@@ -1,5 +1,4 @@
 function imdb = getCifarImdb(opts)
-% preapre the imdb structure, returns image data with mean image subtracted
 unpackPath = fullfile(opts.dataDir, 'cifar-10-batches-mat');
 files = [arrayfun(@(n) sprintf('data_batch_%d.mat', n), 1: 5, 'UniformOutput', false), {'test_batch.mat'}];
 files = cellfun(@(fn) fullfile(unpackPath, fn), files, 'UniformOutput', false);
@@ -37,7 +36,7 @@ if isfield(opts,'contrastNormalization') && opts.contrastNormalization
     data = reshape(z, 32, 32, 3, []);
 end
 
-if isfield(opts, 'whitenData') && opts.whitenData
+if isfield(opts, 'whitenData') &&opts.whitenData
     z = reshape(data, [], 60000);
     W = z(:, set == 1) * z(:, set == 1)' / 60000;
     [V, D] = eig(W);
