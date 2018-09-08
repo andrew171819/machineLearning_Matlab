@@ -8,7 +8,7 @@ net = net_init_pole();
 
 Parameters = [];
 
-addpath(genpath('../CoreModules'));
+addpath(genpath('../subprograms'));
 
 SHOW_ANIMATION_Every_N = 200; % every n trials
 GAMMA = 0.99; % discount factor for critic.
@@ -121,7 +121,7 @@ while (failures < MAX_FAILURES)
         end
         
         % heuristic reinforcement is, current reinforcement + gamma * new failure prediction - previous failure prediction
-        % derivative with L2 cost
+        % derivative with l2 cost
         
         der = Q_old(a_old) - (r + GAMMA * V_new);
         opts.dzdy(a_old, opts.samples - 1) = der;

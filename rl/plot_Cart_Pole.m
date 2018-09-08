@@ -1,6 +1,6 @@
 function plot_Cart_Pole(x, theta)
 
-l=2; % pole's Length for ploting it can be different from the actual length
+l = 2;
 
 pxg = [x + 1 x - 1 x - 1 x + 1 x + 1];
 pyg = [0.25 0.25 1.25 1.25 0.25];
