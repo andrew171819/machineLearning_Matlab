@@ -3,7 +3,6 @@ clear all;
 
 SHOW_ANIMATION = 0;
 
-% initialize the network
 net = net_init_pole();
 
 parameters = [];
@@ -88,7 +87,7 @@ while (failures < MAX_FAILURES)
             failures=failures+1;
             MaxSteps = [MaxSteps;steps];
             
-            disp(['trial was ' int2str(failures) ' steps ' num2str(steps)]);
+            disp(['trial ' int2str(failures) ' steps ' num2str(steps)]);
             
             % reinforcement upon failure is -1, prediction of failure is 0
             r = -1.0;
@@ -100,8 +99,7 @@ while (failures < MAX_FAILURES)
             failed = 0;
             r = 0;
             
-            % value of the new state:
-            % v = max_a(q(s,a))
+            % value of the new state, v = max_a(q(s,a))
             % run mlp
             res(1).x = state;
             [net, res, opts] = net_ff(net, res, opts);
@@ -141,7 +139,7 @@ while (failures < MAX_FAILURES)
 end
 
 if (failures == MAX_FAILURES)
-    disp(['pole not balanced, stopping after ' int2str(failures) ' failures ' ]);
+    disp(['pole not balanced, stops after ' int2str(failures) ' failures ' ]);
 else
     disp(['pole balanced successfully for at least ' int2str(steps) ' steps ' ]);
 end

@@ -12,20 +12,21 @@ end
 dzdh = 0; % accumulated gradient in later time frames
 for f = n_frames: -1: 1
     dzdh = dzdh + res.Fit{f}(1).dzdx;
-    ResetGate = res.Gates{f}(end).x(1: n_hidden_nodes, :);
-    UpdateGate = res.Gates{f}(end).x(n_hidden_nodes + 1:end, :);
+    resetGate = res.Gates{f}(end).x(1: n_hidden_nodes, :);
+    updateGate = res.Gates{f}(end).x(n_hidden_nodes + 1:end, :);
     
     % calculate the gradients of the input transform
-    opts.dzdy = dzdh .* UpdateGate;
+    opts.dzdy = dzdh .* updateGate;
     [net{2}, res.Input{f}, opts] = net_bp(net{2}, res.Input{f}, opts);
     
     dzdy_UpdateGate = dzdh.*(res.Input{f}(end).x - res.Hidden{f}(1).x);
     dzdx_hidden_input = res.Input{f}(1).dzdx(1: n_hidden_nodes, :);
     dzdy_ResetGate = dzdx_hidden_input .* res.Hidden{f}(1).x;
     opts.dzdy = [dzdy_ResetGate; dzdy_UpdateGate];
+    
     % calculate the gradients of the gates
     [net{1}, res.Gates{f},opts] = net_bp(net{1}, res.Gates{f}, opts);
-    dzdh = dzdh .* (1 - UpdateGate) + res.Gates{f}(1).dzdx(1: n_hidden_nodes, :) + dzdx_hidden_input .* ResetGate;
+    dzdh = dzdh .* (1 - updateGate) + res.Gates{f}(1).dzdx(1: n_hidden_nodes, :) + dzdx_hidden_input .* resetGate;
 end
 
 % accumulate gradients in all time frames
