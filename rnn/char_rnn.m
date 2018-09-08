@@ -2,7 +2,7 @@ clear all;
 
 addpath('../');
 addpath(genpath('../subprograms'));
-addpath('./lm_data');
+addpath('./data');
 
 n_epoch = 20;
 dataset_name = 'char';
