@@ -1,9 +1,9 @@
 function cnn_imageNet()
 addpath(genpath('../subprograms'))
-if ~exist('imagenet-vgg.mat', 'file')
-    fprintf('downloading a model\n');
-    urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', 'imagenet-vgg.mat');
-end
+% if ~exist('imagenet-vgg.mat', 'file')
+%     fprintf('downloading a model\n');
+%     urlwrite('http://www.vlfeat.org/matconvnet/models/imagenet-vgg-f.mat', 'imagenet-vgg.mat');
+% end
 net = load('imagenet-vgg.mat');
 
 % obtain and preprocess an image
