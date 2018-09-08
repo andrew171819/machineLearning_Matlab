@@ -1,5 +1,5 @@
 function Y = softmax(X, dzdY)
-if (length(size(X))>2)
+if (length(size(X)) > 2)
     % cnn
     E = exp(bsxfun(@minus, X, max(X, [], 3)));
     L = sum(E,3) ;

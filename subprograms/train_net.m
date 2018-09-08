@@ -11,7 +11,7 @@ end
 opts.MiniBatchError = [];
 opts.MiniBatchLoss = [];
 
-tic
+tic;
 
 opts.order = randperm(opts.n_train);
 if opts.parameters.selective_sgd == 1

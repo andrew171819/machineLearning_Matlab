@@ -1,6 +1,5 @@
 function [y, mask] = dropout(x, dzdy, opts)
 
-% determine mask
 mask = opts.mask;
 scale = cast(1 / (1 - opts.rate), 'like', x) ;
 

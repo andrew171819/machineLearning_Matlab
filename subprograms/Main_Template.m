@@ -14,7 +14,7 @@ opts.parameters.current_ep = 1;
 opts.parameters.learning_method = learning_method;
 opts.parameters.selective_sgd = use_selective_sgd;
 
-if(~exist('init_train','var'))
+if(~exist('init_train', 'var'))
     init_train = 0;
 end
 opts.parameters.init_train = init_train;

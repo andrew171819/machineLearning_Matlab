@@ -2,7 +2,7 @@ function [y] = lrn(x, N, kappa, alpha, beta, dzdy)
 sz = size(x);
 if (length(sz) > 2)
     channel_dim = 3;
-    Index={':', ':'}; %cnn
+    Index = {':', ':'}; %cnn
 else
     channel_dim = 1;
     Index = {}; %mlp
