@@ -8,7 +8,7 @@ for f = 1: n_frames
     [net{4}, res.Fit{f}, opts] = net_bp(net{4}, res.Fit{f}, opts);
 end
 
-% bptt, calculate the gradient wrt memory cell
+% bptt, calculate the gradient
 dzdc=0;
 for f = n_frames: -1: 1
     % gradient from the output gate
@@ -26,7 +26,7 @@ for f = 1: n_frames
     [net{2}, res.Input{f}, opts] = net_bp(net{2}, res.Input{f}, opts);
 end
 
-% calculate the gradients of the input, forget, output gates:
+% calculate the gradients of the input, forget, and output gates
 for f = 1: n_frames
     opts.dzdy = [res.Input{f}(end).x  .* res.Cell{f + 1}(1).dzdx; res.Cell{f}(1).x  .* res.Cell{f + 1}(1).dzdx; res.Fit{f}(1).dzdx .* res.Cell{f + 1}(end).x];
     [net{1}, res.Gates{f}, opts] = net_bp(net{1}, res.Gates{f}, opts);

@@ -1,7 +1,7 @@
 clear all;
 
-addpath('../')
-addpath(genpath('../CoreModules'));
+addpath('../');
+addpath(genpath('../subprograms'));
 addpath('./lm_data');
 
 n_epoch = 20;
@@ -13,15 +13,15 @@ opts.use_cudnn = 0;
 PrepareDataFunc = @PrepareData_Char_RNN;
 
 if strcmp(network_name, 'lstm')
-    NetInit = @net_init_char_lstm;
+    netInit = @net_init_char_lstm;
 end
 
 if strcmp(network_name, 'gru')
-    NetInit = @net_init_char_gru;
+    netInit = @net_init_char_gru;
 end
 
 if strcmp(network_name, 'rnn')
-    NetInit = @net_init_char_rnn;
+    netInit = @net_init_char_rnn;
     opts.parameters.Id_w = 1; % vanilla rnn, 0, rnn with skip links, 1
 end
 
@@ -66,7 +66,7 @@ opts.plot = 1;
 opts.dataDir = ['./', opts.dataset_name, '/'];
 opts = PrepareDataFunc(opts);
 
-net = NetInit(opts);
+net = netInit(opts);
 
 opts = generate_output_filename(opts);
 
@@ -94,7 +94,7 @@ for ep = start_ep:opts.n_epoch
     [net, opts] = train_rnn(net, opts);
     [opts] = test_rnn(net, opts);
     opts.parameters.current_ep = opts.parameters.current_ep + 1;
-    disp(['epoch ', num2str(ep), ' testing error, ', num2str(opts.results.TestEpochError(end)),  ' testing loss, ', num2str(opts.results.TestEpochLoss(end))])
+    disp(['epoch ', num2str(ep), ' test error ', num2str(opts.results.TestEpochError(end)),  ', test loss ', num2str(opts.results.TestEpochLoss(end))])
     
     if opts.plot
         subplot(1, 2, 1);
@@ -108,7 +108,7 @@ for ep = start_ep:opts.n_epoch
         hold on;
         plot(opts.results.TestEpochLoss);
         hold off;
-        title('loss per Epoch')
+        title('loss per epoch')
         drawnow;
     end
     

@@ -36,7 +36,6 @@ end
 res.Hidden{1} = zeros(n_hidden_nodes, batch_size, 'like', opts.input_data);
 
 for f = 1: n_frames
-    % process inputs
     res.Input{f}(1).x = [res.Hidden{f}; opts.input_data(:, :, f)];
     
     % input transform

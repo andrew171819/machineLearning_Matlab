@@ -12,7 +12,7 @@ end
 opts.MiniBatchError = [];
 opts.MiniBatchLoss = [];
 
-tic
+tic;
 
 opts.order = randperm(opts.n_train);
 for mini_b = 1: opts.n_batch
@@ -51,10 +51,10 @@ for mini_b = 1: opts.n_batch
     end
     
     if opts.display_msg == 1 && isfield(opts, 'input_labels')
-        disp(['minibatch error, ', num2str(opts.err(1)), ' minibatch loss, ', num2str(opts.loss(1))])
+        disp(['minibatch error ', num2str(opts.err(1)), ', minibatch loss ', num2str(opts.loss(1))])
     end
     if opts.display_msg == 1 && ~isfield(opts, 'input_labels')
-        disp(['minibatch loss, ', num2str(opts.loss(1))])
+        disp(['minibatch loss ', num2str(opts.loss(1))])
     end
     
     if isfield(opts, 'err')

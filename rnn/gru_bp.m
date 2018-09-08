@@ -8,7 +8,7 @@ for f = 1: n_frames
     [net{3}, res.Fit{f}, opts] = net_bp(net{3}, res.Fit{f},opts);
 end
 
-% bptt, calculate the gradient wrt the hidden nodes
+% bptt, calculate the gradient
 dzdh = 0; % accumulated gradient in later time frames
 for f = n_frames: -1: 1
     dzdh = dzdh + res.Fit{f}(1).dzdx;

@@ -25,7 +25,6 @@ end
 res.Hidden{1}(1).x = zeros(n_hidden_nodes, batch_size, 'like', opts.input_data);
 
 for f = 1: n_frames
-    % process inputs
     res.Gates{f}(1).x = [res.Hidden{f}(1).x; opts.input_data(:, :, f)];
     
     % gates
@@ -36,7 +35,7 @@ for f = 1: n_frames
     res.Input{f}(1).x = [ResetGate .* res.Hidden{f}(1).x; opts.input_data(:, :, f)];
     [net{2},res.Input{f}, opts] = net_ff(net{2}, res.Input{f}, opts);
     
-    % update hidden nodes;
+    % update hidden nodes
     UpdateGate = res.Gates{f}(end).x(n_hidden_nodes + 1: end, :);
     res.Hidden{f + 1}(1).x = res.Hidden{f}(1).x + UpdateGate .* (res.Input{f}(end).x - res.Hidden{f}(1).x);
     

@@ -13,7 +13,7 @@ n_gates = opts.parameters.n_gates;
 
 net{1}.type = 'Gates';
 net{1}.layers = {};
-net{1}.layers{end + 1} = struct('type', 'mlp', 'weights', {{f * randn(n_gates * n_cell_nodes, n_hidden_nodes+n_input_nodes, 'single'), 5 * ones(n_gates * n_cell_nodes,1, 'single')}}) ;
+net{1}.layers{end + 1} = struct('type', 'mlp', 'weights', {{f * randn(n_gates * n_cell_nodes, n_hidden_nodes + n_input_nodes, 'single'), 5 * ones(n_gates * n_cell_nodes,1, 'single')}}) ;
 net{1}.layers{end + 1} = struct('type', 'sigmoid') ;
 
 net{2}.type = 'InputTransform';

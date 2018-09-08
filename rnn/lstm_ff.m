@@ -29,7 +29,6 @@ res.Hidden{1} = zeros(n_hidden_nodes, batch_size, 'like', opts.input_data);
 res.Cell{1}(1).x = zeros(n_cell_nodes, batch_size, 'like', opts.input_data);
 
 for f = 1: n_frames
-    % process inputs
     res.Gates{f}(1).x = [res.Hidden{f};
         opts.input_data(:, :, f)];
     res.Input{f}(1).x = res.Gates{f}(1).x;
@@ -52,8 +51,7 @@ for f = 1: n_frames
     [net{4}, res.Fit{f}, opts] = net_ff( net{4}, res.Fit{f}, opts);
 end
 
-% stats
-for f = 1:n_frames
+for f = 1: n_frames
     if isfield(opts, 'input_labels')
         opts.err(:, f) = error_multiclass(res.Fit{f}(1).class, res.Fit{f});
     end
